@@ -6,152 +6,158 @@
     <title>SS</title>
     <link rel="stylesheet" href="tyyli.css"/>
     <div id="image"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="toiminnallisuudet.js"></script>
 </head>
 
 <body id="content">
 <div style="overflow-x:auto;">
-    <button type="button">LUO UUSI AIHE</button>
+
+    <div class="header">
+        <button type="button">LUO UUSI AIHE</button>
+    </div>
+
     <br>
     <br>
     <table>
         <thead>
         <tr>
-            <th>Aihe!</th>
+            <th>Aihe</th>
+            <th>Teksti</th>
             <th>Kirjoittaja</th>
-            <th>Päivämäärä</th>
-            <th>Alue</th>
-            <th>Vastauksia</th>
+            <!--<th>Päivämäärä</th>-->
+            <!--<th>Vastauksia</th>-->
         </tr>
         </thead>
-        <tbody>
-        <tr></tr> <!--Saako tehtyä jollain ihmeellä taulukosta for each-toiminnon?-->
-            <td>Heippa kivat kaverit</td>
-            <td>Teppo</td>
-            <td>Timestamp</td>
-            <td>Hyvinkää</td>
-            <td>3</td>
+        <tbody id="taulukonrivit">
+        <!--<tr></tr> &lt;!&ndash;Saako tehtyä jollain ihmeellä taulukosta for each-toiminnon?&ndash;&gt;-->
+            <!--<td>Heippa kivat kaverit</td>-->
+            <!--<td>Teppo</td>-->
+            <!--<td>Timestamp</td>-->
+            <!--<td>Hyvinkää</td>-->
+            <!--<td>3</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Yo ladiezzz</td>
-        <td>Seppo</td>
-        <td>Timestamp</td>
-        <td>Kuopio</td>
-        <td>6</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Yo ladiezzz</td>-->
+        <!--<td>Seppo</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Kuopio</td>-->
+        <!--<td>6</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
-        <tr></tr>
-        <td>Iltaa</td>
-        <td>Kekkis</td>
-        <td>Timestamp</td>
-        <td>Helsinki</td>
-        <td>1</td>
+        <!--</tr>-->
+        <!--<tr></tr>-->
+        <!--<td>Iltaa</td>-->
+        <!--<td>Kekkis</td>-->
+        <!--<td>Timestamp</td>-->
+        <!--<td>Helsinki</td>-->
+        <!--<td>1</td>-->
 
-        </tr>
+        <!--</tr>-->
         </tbody>
 
 </table>

@@ -1,4 +1,6 @@
 
+.header{ text-align: center; }
+
 #content {
     background-image: url(mummopappa.jpg);
     background-color: rgba(255,255,255,0.6);
@@ -38,9 +40,10 @@ th, td {
 }
 tbody tr:hover {background-color: darkgrey;}
 
-#lomake{
+form {
     position:center;
     top:50%;
     left:50%;
-    width:250px
+    width:250px;
+    margin: 0 auto;
 }
