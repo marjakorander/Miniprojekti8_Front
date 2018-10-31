@@ -1,0 +1,46 @@
+
+#content {
+    background-image: url(mummopappa.jpg);
+    background-color: rgba(255,255,255,0.6);
+    background-blend-mode: lighten;
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: inherit;
+    background-size: cover;
+
+}
+#image{
+    content: url(Nimetön.png);
+    width: 100%;
+}
+
+/*<center><img src="Nimetön.png" alt="Senioreiden Senssit lämpöä elämän ehtoopuolelle" style="width:1200px;height:300px;">*/
+                                                                                                                       /*</center>*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: rgba(255,255,255,0.4);
+    background-blend-mode: lighten;
+    font-size: 22px;
+}
+
+
+th {
+    height: 50px;
+}
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+tbody tr:hover {background-color: darkgrey;}
+
+#lomake{
+    position:center;
+    top:50%;
+    left:50%;
+    width:250px
+}
