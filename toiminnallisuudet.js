@@ -23,34 +23,32 @@ $(document).ready(function() {
 });
 
 // Lähetetään dataa lomakkeella
+$("#lomake").submit(function(e){
+// $("#testibuttoni").on("click", function(e){ <<---- TESTIHOMMIA
 
-// $("#lomake").attr("action", "lomakefunktio()");
-// function lomakefunktio() {
-//     alert('toimii');
-// } {
-    // stop the regular form submission
     // e.preventDefault();
-    // alert('toimii');
 
-    // collect the form data while iterating over the inputs
-    // var data = {};
-    // for (var i = 0, ii = form.length; i < ii; ++i) {
-    //     var input = form[i];
-    //     if (input.name) {
-    //         data[input.name] = input.value;
-    //     }
-    // }
-    // addData();
-}
+    // get values from textboxs
+    var aihe = $('#aiheboksi').val();
+    var teksti = $('#tekstiboksi').val();
+    var nimi = $('#nimiboksi').val();
 
-// var lomakedata = JSON.stringify($("#lomake").serializeArray());
-//
-//
-// $.ajax({
-//     type: "POST",
-//     url: "http://localhost:8080/",
-//     data: lomakedata,
-//     // success: function(){},
-//     dataType: "json",
-//     contentType : "application/json"
-// });
+    var data = {name:nimi, text:teksti, topic:aihe};
+
+    $.ajax({
+        headers: {
+            "Accept": "application/json",
+            "Content-Type":"application/json",
+        },
+        url:"http://localhost:8080/",
+        type:"POST",
+        dataType:"json",
+        data: JSON.stringify(data),
+        success: function(response){
+            alert(JSON.stringify(response));
+        },
+        error: function(err){
+            alert(JSON.stringify(err));
+        }
+    })
+});
