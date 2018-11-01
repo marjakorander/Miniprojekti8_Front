@@ -7,19 +7,21 @@ $(document).ready(function() {
         console.dir(data);
 
         for (var rivi = 0; rivi < data.length; rivi++) {
-            var aihe = (data[rivi].topic);
-            var teksti = (data[rivi].text);
-            var nimi = (data[rivi].name);
-            var iidee = data[rivi].messageId
-            var $taulukonrivit = $('#taulukonrivit');
+            if(data[rivi].hasAttribute("topic")) {
+                var aihe = (data[rivi].topic);
+                var teksti = (data[rivi].text);
+                var nimi = (data[rivi].name);
+                var iidee = data[rivi].messageId
+                var $taulukonrivit = $('#taulukonrivit');
 
 
-            var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunction' + '(' + iidee + ')');
+                var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunction' + '(' + iidee + ')');
 
-            $tr.append($('<td></td>').text(aihe));
-            $tr.append($('<td></td>').text(teksti));
-            $tr.append($('<td></td>').text(nimi));
-            $taulukonrivit.append($tr);
+                $tr.append($('<td></td>').text(aihe));
+                $tr.append($('<td></td>').text(teksti));
+                $tr.append($('<td></td>').text(nimi));
+                $taulukonrivit.append($tr);
+            }
 
 
         }
@@ -36,25 +38,24 @@ function myFunction(id) {
     // }
 
     $.ajax({
-        url: "http://localhost:8080/id/" + id
+        url: "http://localhost:8080/idt/" + id
     }).then(function(data) {
         console.dir(data);
 
+        for(var viesti = 0; viesti <= data.length; viesti++) {
+            var teksti = data[viesti].text;
+            var nimi = data[viesti].name;
 
-        var teksti = data.text;
-        var nimi = data["name"];
+            console.log(teksti);
+            console.log(nimi);
 
-        console.log(teksti);
-        console.log(nimi);
+            var $aiherivi = $('#' + id);
+            var $tr = $('<tr></tr>');
 
-        var $aiherivi = $('#' + id);
-        var $tr = $('<tr></tr>');
-
-        $tr.append($('<td></td>').text(teksti));
-        $tr.append($('<td></td>').text(nimi));
-        $aiherivi.append($tr);
-
-
+            $tr.append($('<td></td>').text(teksti));
+            $tr.append($('<td></td>').text(nimi));
+            $aiherivi.append($tr);
+        }
 
 
     });
@@ -83,7 +84,7 @@ $("#lomake").submit(function(e){
         dataType:"json",
         data: JSON.stringify(data),
         success: function(response){
-            alert(JSON.stringify(response));
+            // alert(JSON.stringify(response));
         },
         error: function(err){
             alert(JSON.stringify(err));
