@@ -49,11 +49,15 @@ function myFunction(id) {
             console.log(nimi);
 
             var $aiherivi = $('#' + id);
+            var $taulukonrivit = $('#taulukonrivit');
             var $tr = $('<tr></tr>');
 
             $tr.append($('<td></td>').text(teksti));
             $tr.append($('<td></td>').text(nimi));
-            $aiherivi.append($tr);
+            // $aiherivi.append($tr);
+            // $aiherivi.insertAfter($tr);
+            $aiherivi.after($tr);
+
         }
 
 
