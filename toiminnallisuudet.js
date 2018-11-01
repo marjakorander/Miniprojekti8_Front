@@ -5,9 +5,8 @@ $(document).ready(function() {
         url: "http://localhost:8080/"
     }).then(function(data) {
         console.dir(data);
-
         for (var rivi = 0; rivi < data.length; rivi++) {
-            if(data[rivi].hasAttribute("topic")) {
+            if(!(data[rivi].topic == null)) {
                 var aihe = (data[rivi].topic);
                 var teksti = (data[rivi].text);
                 var nimi = (data[rivi].name);
