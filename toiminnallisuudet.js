@@ -10,19 +10,57 @@ $(document).ready(function() {
             var aihe = (data[rivi].topic);
             var teksti = (data[rivi].text);
             var nimi = (data[rivi].name);
+            var iidee = data[rivi].messageId
             var $taulukonrivit = $('#taulukonrivit');
-            var $tr = $('<tr></tr>');
+
+
+            var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunction' + '(' + iidee + ')');
 
             $tr.append($('<td></td>').text(aihe));
             $tr.append($('<td></td>').text(teksti));
             $tr.append($('<td></td>').text(nimi));
             $taulukonrivit.append($tr);
 
+
         }
     });
 });
 
-// Lähetetään dataa lomakkeella
+// Haetaan messageId:n perusteella viestit
+function myFunction(id) {
+    // var x = document.getElementById(id);
+    // if (x.style.display === "none") {
+    //     x.style.display = "block";
+    // } else {
+    //     x.style.display = "none";
+    // }
+
+    $.ajax({
+        url: "http://localhost:8080/id/" + id
+    }).then(function(data) {
+        console.dir(data);
+
+
+        var teksti = data.text;
+        var nimi = data["name"];
+
+        console.log(teksti);
+        console.log(nimi);
+
+        var $aiherivi = $('#' + id);
+        var $tr = $('<tr></tr>');
+
+        $tr.append($('<td></td>').text(teksti));
+        $tr.append($('<td></td>').text(nimi));
+        $aiherivi.append($tr);
+
+
+
+
+    });
+}
+
+// Luodaan uusi aihe
 $("#lomake").submit(function(e){
 // $("#testibuttoni").on("click", function(e){ <<---- TESTIHOMMIA
 
