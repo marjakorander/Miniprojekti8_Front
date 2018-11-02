@@ -1,4 +1,6 @@
 var viestiketjuid;
+var lomakkeenPiilotusStatus;
+
 // Haetaan kaikki PIKAISET viestit, ja tehdään niistä taulukko.
 $(document).ready(function() {
     $.ajax({
@@ -10,11 +12,11 @@ $(document).ready(function() {
                 var aihe = (data[rivi].topic);
                 var teksti = (data[rivi].text);
                 var nimi = (data[rivi].name);
-                var iidee = data[rivi].messageId
+                var iidee = data[rivi].messageId;
                 var $taulukonrivit = $('#pikaisettaulukonrivit');
 
 
-                var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunction' + '(' + iidee + ')');
+                var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunctionPikaiset' + '(' + iidee + ')');
 
                 $tr.append($('<td></td>').text(aihe));
                 $tr.append($('<td></td>').text(nimi));
@@ -22,6 +24,8 @@ $(document).ready(function() {
 
                 $taulukonrivit.append($tr);
             }
+
+            viestiketjuid = iidee;
 
 
         }
@@ -42,7 +46,7 @@ $(document).ready(function() {
                 var $taulukonrivit = $('#kevyettaulukonrivit');
 
 
-                var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunction' + '(' + iidee + ')');
+                var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunctionKevyet' + '(' + iidee + ')');
 
                 $tr.append($('<td></td>').text(aihe));
                 $tr.append($('<td></td>').text(nimi));
@@ -50,6 +54,8 @@ $(document).ready(function() {
 
                 $taulukonrivit.append($tr);
             }
+
+            viestiketjuid = iidee;
 
 
         }
@@ -70,7 +76,7 @@ $(document).ready(function() {
                 var $taulukonrivit = $('#vakavattaulukonrivit');
 
 
-                var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunction' + '(' + iidee + ')');
+                var $tr = $('<tr></tr>').attr('id', iidee).attr('onclick', 'myFunctionVakavat' + '(' + iidee + ')');
 
                 $tr.append($('<td></td>').text(aihe));
                 $tr.append($('<td></td>').text(nimi));
@@ -79,90 +85,13 @@ $(document).ready(function() {
                 $taulukonrivit.append($tr);
             }
 
+            viestiketjuid = iidee;
+
 
         }
     });
 });
 
-// // Haetaan messageId:n perusteella viestit
-// function myFunction(id) {
-//
-//     viestiketjuid = id;
-//     console.log("myF");
-//     $.ajax({
-//         url: "http://localhost:8080/idt/" + id
-//     }).then(function (data) {
-//         console.dir(data);
-//         var $aiherivi = $('#' + id);
-//         var $vastauslomake = $('#vastauslomake');
-//
-//         var pastekohde = $aiherivi;
-//
-//         // etsitään viestiketjuun liittyvät vastausviestit
-//         for (var viesti = 0; viesti < data.length; viesti++) {
-//             var teksti = data[viesti].text;
-//             var nimi = data[viesti].name;
-//
-//             // var $taulukonrivit = $('#taulukonrivit');
-//             var $tr = $('<tr></tr>').attr('id', 'kohde' + viesti);
-//
-//             $tr.append($('<td></td>').text(teksti));
-//             $tr.append($('<td></td>').text(nimi));
-//             // $aiherivi.append($tr);
-//             // $aiherivi.insertAfter($tr);
-//             if (viesti > 0) {
-//                 $aiherivi.after($tr);
-//             } else {
-//                 $('#kohde' + (viesti - 1)).after($tr);
-//             }
-//             //pastekohde = viimeisin;
-//
-//             $aiherivi.after($vastauslomake);
-//         }
-//     })
-// }
-// TONIN KOODI:
-    //  var $trlomake = $('<tr></tr>');
-    //
-    //  $trlomake.append($('<td></td>').append($vastauslomake));
-    //
-    // $aiherivi.after($trlomake);
-    // console.dir($trlomake);
-    // <--- TONIN KOODI
-    //-----------------------------------------------------
-    /* $tr.append($('<td></td>').text(nimi));
-     var lomake = $('<form></form>').attr('method', 'post');
-     var tekstiboksi = $('<input></input>').attr({
-         type:"text",
-         id:"tekstiboksi"
-     });
-     var nimiboksi = $('<input></input>').attr({
-         type:"text",
-         id:"nimiboksi"
-     });
-     var submitbuttoni = $('<button></button>').attr({
-         type:"submit",
-         id:"submitbuttoni"
-     });
-
-     lomake.append(tekstiboksi);
-     lomake.append(nimiboksi);
-     lomake.append(submitbuttoni);
-
-     var $uusitr = $('<tr></tr>');
-     $uusitr.append(lomake);
-     $aiherivi.after($uusitr);*/
-
-
-    // $('#vastauslomake').appendTo($aiherivi);
-
-
-    // });
-// }
-// function kommentoi(){
-//     console.log("Kommentoi...");
-//     console.log(viestiketjuid);
-// }
 // Luodaan uusi aihe
     $("#vakavalomake").submit(function (e) {
 // $("#testibuttoni").on("click", function(e){ <<---- TESTIHOMMIA
@@ -282,11 +211,235 @@ $("#kevytlomake").submit(function (e) {
 
 });
 
+// Haetaan messageId:n perusteella viestit - PIKAISET
+function myFunctionPikaiset(id) {
+
+    // Näytetään lomake
+    lomakkeenPiilotusStatus.style.display = "block";
+
+    viestiketjuid=id;
+
+    $.ajax({
+        url: "http://localhost:8080/pikaiset/idt/" + id
+    }).then(function(data) {
+        console.dir(data);
+        var $aiherivi = $('#' + id);
+        var $vastauslomake = $('#vastauslomake');
+
+        var $vastausdivi = $('<tr></tr>').attr({
+            id:"vastausdiv" + id,
+            class:"vastausdivi"
+        });
+
+
+        // etsitään viestiketjuun liittyvät vastausviestit
+        // for(var viesti = data.length-1; viesti > 0; viesti--) {
+        for(var viesti = 1; viesti < data.length; viesti++) {
+            var teksti = data[viesti].text;
+            var nimi = data[viesti].name;
+
+            // var $taulukonrivit = $('#taulukonrivit');
+            var $tr = $('<tr></tr>').attr({
+                id:"kohde" + viesti,
+                // rowspan:"3"
+            });
+
+            $tr.append($('<td></td>').text(teksti));
+            $tr.append($('<td></td>').text(nimi));
+
+            $vastausdivi.append($tr);
+
+        }
+        var $divitr = $('<tr></tr>').attr({
+            id:"divitr" + id,
+            class:"keskitettydivi"
+        });
+
+        $vastausdivi.append($vastauslomake);
+
+        //nappi
+
+        var $buttoni = $('<button>Piilota</button>').attr({
+            type:"button",
+            id:"buttoni" + id,
+            onclick:"piilota(" + id + ")"
+        });
+
+        // uusi td -->
+
+        var $teedee = $('<td></td>').attr({
+            id:"teedee" + id,
+            colspan:"5"
+            // class:"keskitettydivi"
+        });
+
+        $teedee.append($buttoni);
+        $teedee.append($vastausdivi);
+        $divitr.append($teedee);
+
+        $aiherivi.after($divitr);
+    });
+}
+
+// Haetaan messageId:n perusteella viestit - KEVYET
+function myFunctionKevyet(id) {
+
+    // Näytetään lomake
+    lomakkeenPiilotusStatus.style.display = "block";
+
+    viestiketjuid=id;
+
+    $.ajax({
+        url: "http://localhost:8080/kevyet/idt/" + id
+    }).then(function(data) {
+        console.dir(data);
+        var $aiherivi = $('#' + id);
+        var $vastauslomake = $('#vastauslomake');
+
+        var $vastausdivi = $('<tr></tr>').attr({
+            id:"vastausdiv" + id,
+            class:"vastausdivi"
+        });
+
+
+        // etsitään viestiketjuun liittyvät vastausviestit
+        // for(var viesti = data.length-1; viesti > 0; viesti--) {
+        for(var viesti = 1; viesti < data.length; viesti++) {
+            var teksti = data[viesti].text;
+            var nimi = data[viesti].name;
+
+            // var $taulukonrivit = $('#taulukonrivit');
+            var $tr = $('<tr></tr>').attr({
+                id:"kohde" + viesti,
+                // rowspan:"3"
+            });
+
+            $tr.append($('<td></td>').text(teksti));
+            $tr.append($('<td></td>').text(nimi));
+
+            $vastausdivi.append($tr);
+
+        }
+        var $divitr = $('<tr></tr>').attr({
+            id:"divitr" + id,
+            class:"keskitettydivi"
+        });
+
+        $vastausdivi.append($vastauslomake);
+
+        //nappi
+
+        var $buttoni = $('<button>Piilota</button>').attr({
+            type:"button",
+            id:"buttoni" + id,
+            onclick:"piilota(" + id + ")"
+        });
+
+        // uusi td -->
+
+        var $teedee = $('<td></td>').attr({
+            id:"teedee" + id,
+            colspan:"5"
+            // class:"keskitettydivi"
+        });
+
+        $teedee.append($buttoni);
+        $teedee.append($vastausdivi);
+        $divitr.append($teedee);
+
+        $aiherivi.after($divitr);
+    });
+}
+
+// Haetaan messageId:n perusteella viestit
+function myFunctionVakavat(id) {
+
+    // Näytetään lomake
+    lomakkeenPiilotusStatus.style.display = "block";
+
+    viestiketjuid=id;
+
+    $.ajax({
+        url: "http://localhost:8080/vakavat/idt/" + id
+    }).then(function(data) {
+        console.dir(data);
+        var $aiherivi = $('#' + id);
+        var $vastauslomake = $('#vastauslomake');
+
+        var $vastausdivi = $('<tr></tr>').attr({
+            id:"vastausdiv" + id,
+            class:"vastausdivi"
+        });
+
+
+        // etsitään viestiketjuun liittyvät vastausviestit
+        // for(var viesti = data.length-1; viesti > 0; viesti--) {
+        for(var viesti = 1; viesti < data.length; viesti++) {
+            var teksti = data[viesti].text;
+            var nimi = data[viesti].name;
+
+            // var $taulukonrivit = $('#taulukonrivit');
+            var $tr = $('<tr></tr>').attr({
+                id:"kohde" + viesti,
+                // rowspan:"3"
+            });
+
+            $tr.append($('<td></td>').text(teksti));
+            $tr.append($('<td></td>').text(nimi));
+
+            $vastausdivi.append($tr);
+
+        }
+        var $divitr = $('<tr></tr>').attr({
+            id:"divitr" + id,
+            class:"keskitettydivi"
+        });
+
+        $vastausdivi.append($vastauslomake);
+
+        //nappi
+
+        var $buttoni = $('<button>Piilota</button>').attr({
+            type:"button",
+            id:"buttoni" + id,
+            onclick:"piilota(" + id + ")"
+        });
+
+        // uusi td -->
+
+        var $teedee = $('<td></td>').attr({
+            id:"teedee" + id,
+            colspan:"5"
+            // class:"keskitettydivi"
+        });
+
+        $teedee.append($buttoni);
+        $teedee.append($vastausdivi);
+        $divitr.append($teedee);
+
+        $aiherivi.after($divitr);
+    });
+}
+
     jQuery(document).ready(function ($) {
         $(".clickable-row").click(function () {
             window.location = $(this).data("href");
         });
     });
 
+$(document).ready(function lomakkeenpiilotus() {
+    lomakkeenPiilotusStatus = document.getElementById("vastauslomake");
+    lomakkeenPiilotusStatus.style.display = "none";
+});
+
+function piilota(id) {
+    var x = document.getElementById('divitr' + id);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+
+}
 
 
