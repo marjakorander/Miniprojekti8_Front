@@ -421,6 +421,111 @@ function myFunctionVakavat(id) {
     });
 }
 
+//Viestiketjuun kommentointi - KEVYET
+function kommentoiKevyet(){
+
+    $.ajax({
+        url: "http://localhost:8080/kevyet/"
+    }).then(function() {
+
+        var teksti = $('#vastausteksti').val();
+        var nimi = $('#vastausnimi').val();
+
+        console.log(teksti);
+        console.log(nimi);
+        console.log(viestiketjuid)
+
+        var data = {name:nimi, text:teksti, messageId:viestiketjuid};
+
+        $.ajax({
+            headers: {
+                "Accept": "application/json",
+                "Content-Type":"application/json",
+            },
+            url:"http://localhost:8080/kevyet/",
+            type:"POST",
+            dataType:"json",
+            data: JSON.stringify(data),
+        })
+
+        alert('Viesti lähetetty.')
+        // Päivitetään sivu
+        location.reload();
+
+    });
+
+}
+
+//Viestiketjuun kommentointi - PIKAISET
+function kommentoiPikaiset(){
+
+    $.ajax({
+        url: "http://localhost:8080/pikaiset/"
+    }).then(function() {
+
+        var teksti = $('#vastausteksti').val();
+        var nimi = $('#vastausnimi').val();
+
+        console.log(teksti);
+        console.log(nimi);
+        console.log(viestiketjuid)
+
+        var data = {name:nimi, text:teksti, messageId:viestiketjuid};
+
+        $.ajax({
+            headers: {
+                "Accept": "application/json",
+                "Content-Type":"application/json",
+            },
+            url:"http://localhost:8080/pikaiset/",
+            type:"POST",
+            dataType:"json",
+            data: JSON.stringify(data),
+        })
+
+        alert('Viesti lähetetty.')
+        // Päivitetään sivu
+        location.reload();
+
+    });
+
+}
+
+//Viestiketjuun kommentointi - VAKAVAT
+function kommentoiVakavat(){
+
+    $.ajax({
+        url: "http://localhost:8080/vakavat/"
+    }).then(function() {
+
+        var teksti = $('#vastausteksti').val();
+        var nimi = $('#vastausnimi').val();
+
+        console.log(teksti);
+        console.log(nimi);
+        console.log(viestiketjuid)
+
+        var data = {name:nimi, text:teksti, messageId:viestiketjuid};
+
+        $.ajax({
+            headers: {
+                "Accept": "application/json",
+                "Content-Type":"application/json",
+            },
+            url:"http://localhost:8080/vakavat/",
+            type:"POST",
+            dataType:"json",
+            data: JSON.stringify(data),
+        })
+
+        alert('Viesti lähetetty.')
+        // Päivitetään sivu
+        location.reload();
+
+    });
+
+}
+
     jQuery(document).ready(function ($) {
         $(".clickable-row").click(function () {
             window.location = $(this).data("href");
